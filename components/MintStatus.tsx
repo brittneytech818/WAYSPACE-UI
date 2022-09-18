@@ -77,7 +77,7 @@ function SaleStatus({
 
   return (
     <>
-      <MintButton isMinted={isMinted} collection={collection} availableMints={availableMints} mintCounter={mintCounter} allowlistEntry={allowlistEntry} setIsMinted={setIsMinted} setErrors={setErrors} />
+      <MintButton isMinted={isMinted} collection={collection} mintCounter={mintCounter} allowlistEntry={allowlistEntry} setIsMinted={setIsMinted} setErrors={setErrors} />
       {saleIsActive && (
         <Text variant="paragraph-sm" align="center" color="tertiary">
           <CountdownTimer targetTime={endDate} refresh={true} appendText=" left" />
