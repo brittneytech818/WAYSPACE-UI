@@ -38,6 +38,7 @@ const MintBundleButton = ({ collection }) => {
       awaitingApproval={awaitingApproval}
       isMinting={isMinting}
       buttonText="Mint Bundle"
+      collection={collection}
     />
   )
 }
