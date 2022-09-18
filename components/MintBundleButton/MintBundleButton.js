@@ -1,17 +1,12 @@
 import { useSaleStatus } from '@hooks/useSaleStatus'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { Button, SpinnerOG } from '@zoralabs/zord'
 import { useERC721DropContract } from 'providers/ERC721DropProvider'
 import { useCallback, useState } from 'react'
-import { useAccount, useNetwork } from 'wagmi'
-import { waitingApproval } from 'styles/styles.css'
+import MintButtonStyles from '@components/MintButtonStyles'
 import { cleanErrors } from 'lib/errors'
 
 const MintBundleButton = ({ collection }) => {
   const presale = false
-  const { switchNetwork } = useNetwork()
-  const { data: account } = useAccount()
-  const { chainId, correctNetwork, purchaseBundle, purchase } = useERC721DropContract()
+  const { purchaseBundle, purchase } = useERC721DropContract()
   const { saleNotStarted } = useSaleStatus({
     collection,
     presale,
@@ -42,52 +37,15 @@ const MintBundleButton = ({ collection }) => {
   }, [purchase, purchaseBundle])
 
   return (
-    <ConnectButton.Custom>
-      {({ openConnectModal }) => (
-        <Button
-          icon={isMinted ? 'Check' : undefined}
-          iconSize="sm"
-          size="lg"
-          variant={
-            account == null
-              ? undefined
-              : !correctNetwork
-              ? 'destructive'
-              : saleNotStarted
-              ? 'secondary'
-              : undefined
-          }
-          onClick={
-            !account
-              ? openConnectModal
-              : !correctNetwork
-              ? () => switchNetwork?.(chainId)
-              : handleMint
-          }
-          style={isMinted ? { backgroundColor: '#1CB687' } : {}}
-          className={awaitingApproval ? waitingApproval : ''}
-          disabled={
-            isMinting || awaitingApproval || (account && correctNetwork && saleNotStarted)
-          }
-        >
-          {isMinting ? (
-            <SpinnerOG />
-          ) : !account ? (
-            'Connect wallet'
-          ) : !correctNetwork ? (
-            'Wrong network'
-          ) : awaitingApproval ? (
-            'Confirm in wallet'
-          ) : isMinted ? (
-            'Minted'
-          ) : saleNotStarted ? (
-            'Not started'
-          ) : (
-            'Mint Bundle'
-          )}
-        </Button>
-      )}
-    </ConnectButton.Custom>
+    <MintButtonStyles
+      isMinted={isMinted}
+      collection={collection}
+      onClick={handleMint}
+      awaitingApproval={awaitingApproval}
+      isMinting={isMinting}
+      saleNotStarted={saleNotStarted}
+      buttonText="Mint Bundle"
+    />
   )
 }
 
