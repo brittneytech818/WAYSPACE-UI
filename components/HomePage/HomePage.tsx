@@ -7,6 +7,7 @@ import { NextPage } from 'next'
 import { SubgraphERC721Drop } from 'models/subgraph'
 import DropSection from '@components/DropSection'
 import Head from '@components/Head'
+import MintBundleButton from '@components/MintBundleButton'
 import { ipfsImage } from '@lib/helpers'
 import { header } from 'styles/styles.css'
 import { useEffect, useState } from 'react'
@@ -35,9 +36,12 @@ const HomePage: NextPage<HomePageProps> = ({ collection, chainId, collectionTwo 
       <Flex justify="flex-end" p="x4" className={header}>
         <ConnectWallet />
       </Flex>
+      <Stack>
+      <MintBundleButton collection={collection} />
       <Stack direction={ isMobile ? "column" :"row"} mt="x3" gap="x3">
-        <DropSection collection={collection} isSecond={false} />
-        {collectionTwo && <DropSection collection={collectionTwo} isSecond />}
+        <DropSection collection={collection} />
+        {collectionTwo && <DropSection collection={collectionTwo} />}
+      </Stack>
       </Stack>
     </>
   )
