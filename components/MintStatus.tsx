@@ -25,7 +25,6 @@ function SaleStatus({
   isMinted,
   setIsMinted,
   presale,
-  isSecond,
   mintCounter = 1,
   availableMints,
   allowlistEntry,
@@ -34,7 +33,6 @@ function SaleStatus({
   isMinted: boolean
   setIsMinted: (state: boolean) => void
   presale: boolean
-  isSecond: boolean
   mintCounter: number
   availableMints: number
   allowlistEntry?: AllowListEntry
@@ -79,7 +77,7 @@ function SaleStatus({
 
   return (
     <>
-      <MintButton isMinted={isMinted} collection={collection} isSecond={isSecond} availableMints={availableMints} mintCounter={mintCounter} allowlistEntry={allowlistEntry} setIsMinted={setIsMinted} setErrors={setErrors} />
+      <MintButton isMinted={isMinted} collection={collection} availableMints={availableMints} mintCounter={mintCounter} allowlistEntry={allowlistEntry} setIsMinted={setIsMinted} setErrors={setErrors} />
       {saleIsActive && (
         <Text variant="paragraph-sm" align="center" color="tertiary">
           <CountdownTimer targetTime={endDate} refresh={true} appendText=" left" />
@@ -106,13 +104,11 @@ function SaleStatus({
 export function MintStatus({
   collection,
   presale = false,
-  isSecond,
   showPrice = true,
   allowlistEntry,
 }: {
   collection: SubgraphERC721Drop
   presale?: boolean
-  isSecond?: boolean
   showPrice?: boolean
   allowlistEntry?: AllowListEntry
 }) {
@@ -235,7 +231,6 @@ export function MintStatus({
       <SaleStatus
         collection={collection}
         mintCounter={mintCounter}
-        isSecond={isSecond}
         isMinted={isMinted}
         presale={presale}
         setIsMinted={setIsMinted}

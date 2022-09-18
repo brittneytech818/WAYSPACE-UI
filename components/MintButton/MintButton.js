@@ -15,7 +15,6 @@ const MintButton = ({
   allowlistEntry,
   setIsMinted,
   setErrors,
-  isSecond,
 }) => {
   const presale = false
   const { switchNetwork } = useNetwork()
@@ -48,7 +47,7 @@ const MintButton = ({
       setAwaitingApproval(false)
       setIsMinting(false)
     }
-  }, [mintCounter, allowlistEntry, isSecond, purchase, purchaseTrack])
+  }, [mintCounter, allowlistEntry, purchase, purchaseTrack])
 
   return (
     <ConnectButton.Custom>
