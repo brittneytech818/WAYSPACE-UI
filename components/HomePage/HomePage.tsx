@@ -37,7 +37,7 @@ const HomePage: NextPage<HomePageProps> = ({ collection, chainId, collectionTwo 
         <ConnectWallet />
       </Flex>
       <Stack>
-      <MintBundleButton collection={collection} availableMints={availableMints} mintCounter={mintCounter} allowlistEntry={allowlistEntry} setIsMinted={setIsMinted} setErrors={setErrors} />
+      <MintBundleButton collection={collection} />
       <Stack direction={ isMobile ? "column" :"row"} mt="x3" gap="x3">
         <DropSection collection={collection} />
         {collectionTwo && <DropSection collection={collectionTwo} />}

@@ -96,7 +96,7 @@ const MintButton = ({
           ) : availableMints < 1 ? (
             'Mint limit reached'
           ) : (
-            'Mint'
+            `Mint "${collection.name}"`
           )}
         </Button>
       )}
