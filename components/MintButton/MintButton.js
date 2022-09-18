@@ -17,7 +17,6 @@ const MintButton = ({
   setErrors,
   isSecond,
 }) => {
-  console.log('collection', collection)
   const presale = false
   const { switchNetwork } = useNetwork()
   const { data: account } = useAccount()
@@ -35,7 +34,6 @@ const MintButton = ({
     setErrors(undefined)
     try {
       const tx = await purchaseTrack(mintCounter, collection.editionMetadata.trackNumber)
-      console.log({ tx })
       setAwaitingApproval(false)
       setIsMinting(true)
       if (tx) {
