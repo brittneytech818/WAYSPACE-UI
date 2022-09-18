@@ -11,6 +11,7 @@ const MintButtonStyles = ({
   onClick,
   awaitingApproval,
   isMinting,
+  collection,
 }) => {
   const presale = false
   const { switchNetwork } = useNetwork()
