@@ -7,17 +7,11 @@ import { useAccount, useNetwork } from 'wagmi'
 import { waitingApproval } from 'styles/styles.css'
 import { cleanErrors } from 'lib/errors'
 
-const MintBundleButton = ({
-  collection,
-  availableMints,
-  mintCounter,
-  allowlistEntry,
-  setErrors,
-}) => {
+const MintBundleButton = ({ collection }) => {
   const presale = false
   const { switchNetwork } = useNetwork()
   const { data: account } = useAccount()
-  const { chainId, correctNetwork, purchaseTrack, purchase } = useERC721DropContract()
+  const { chainId, correctNetwork, purchaseBundle, purchase } = useERC721DropContract()
   const { saleNotStarted } = useSaleStatus({
     collection,
     presale,
@@ -29,9 +23,8 @@ const MintBundleButton = ({
   const handleMint = useCallback(async () => {
     setIsMinted(false)
     setAwaitingApproval(true)
-    setErrors(undefined)
     try {
-      const tx = await purchaseTrack(mintCounter, collection.editionMetadata.trackNumber)
+      const tx = await purchaseBundle(1)
       setAwaitingApproval(false)
       setIsMinting(true)
       if (tx) {
@@ -42,11 +35,11 @@ const MintBundleButton = ({
         throw 'Error creating transaction! Please try again'
       }
     } catch (e) {
-      setErrors(cleanErrors(e))
+      console.error(cleanErrors(e))
       setAwaitingApproval(false)
       setIsMinting(false)
     }
-  }, [mintCounter, allowlistEntry, purchase, purchaseTrack])
+  }, [purchase, purchaseBundle])
 
   return (
     <ConnectButton.Custom>
@@ -60,7 +53,7 @@ const MintBundleButton = ({
               ? undefined
               : !correctNetwork
               ? 'destructive'
-              : saleNotStarted || availableMints < 1
+              : saleNotStarted
               ? 'secondary'
               : undefined
           }
@@ -74,10 +67,7 @@ const MintBundleButton = ({
           style={isMinted ? { backgroundColor: '#1CB687' } : {}}
           className={awaitingApproval ? waitingApproval : ''}
           disabled={
-            isMinting ||
-            awaitingApproval ||
-            (account && correctNetwork && saleNotStarted) ||
-            (account && correctNetwork && availableMints < 1)
+            isMinting || awaitingApproval || (account && correctNetwork && saleNotStarted)
           }
         >
           {isMinting ? (
@@ -92,10 +82,8 @@ const MintBundleButton = ({
             'Minted'
           ) : saleNotStarted ? (
             'Not started'
-          ) : availableMints < 1 ? (
-            'Mint limit reached'
           ) : (
-            'Mint'
+            'Mint Bundle'
           )}
         </Button>
       )}

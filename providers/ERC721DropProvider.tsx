@@ -18,6 +18,7 @@ import abi from '@lib/ERC721Drop-abi.json'
 export interface ERC721DropProviderState {
   purchase: (quantity: number) => Promise<ContractTransaction | undefined>
   purchaseTrack: (quantity: number, trackNumber: number) => Promise<ContractTransaction | undefined>
+  purchaseBundle: (quantity: number) => Promise<ContractTransaction | undefined>
   purchasePresale: (
     quantity: number,
     allowlistEntry?: AllowListEntry
@@ -100,6 +101,17 @@ function ERC721DropContractProvider({
       if (!drop || !saleDetails) return
       const tx = await drop.purchaseTrack(quantity, trackNumber, {
         value: (saleDetails.publicSalePrice as BigNumber).mul(BigNumber.from(quantity)),
+      })
+      return tx
+    },
+    [drop, saleDetails]
+  )
+
+  const purchaseBundle = useCallback(
+    async (quantity: number) => {
+      if (!drop || !saleDetails) return
+      const tx = await drop.purchaseBundle(quantity, {
+        value: (BigNumber.from("33300000000000000")).mul(BigNumber.from(quantity)),
       })
       return tx
     },
@@ -268,6 +280,7 @@ function ERC721DropContractProvider({
       value={{
         purchase,
         purchaseTrack,
+        purchaseBundle,
         purchasePresale,
         isAdmin,
         chainId,
