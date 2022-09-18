@@ -11,7 +11,6 @@ const MintButton = ({
   setIsMinted,
   setErrors,
 }) => {
-  const presale = false
   const { purchaseTrack, purchase } = useERC721DropContract()
   const [awaitingApproval, setAwaitingApproval] = useState(false)
   const [isMinting, setIsMinting] = useState(false)

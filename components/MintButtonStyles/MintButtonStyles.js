@@ -12,6 +12,7 @@ const MintButtonStyles = ({
   awaitingApproval,
   isMinting,
 }) => {
+  const presale = false
   const { switchNetwork } = useNetwork()
   const { data: account } = useAccount()
   const { chainId, correctNetwork } = useERC721DropContract()
