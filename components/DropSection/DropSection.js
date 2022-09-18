@@ -5,7 +5,7 @@ import { ipfsImage } from '@lib/helpers'
 import { maxWidth, border, heroImage } from 'styles/styles.css'
 import Image from 'next/image'
 
-const DropSection = ({ collection, isSecond }) => (
+const DropSection = ({ collection }) => (
   <Box className={maxWidth} p="x4">
     <Text variant="display-md" mb="x8" align="center">
       {collection.name}
@@ -25,7 +25,7 @@ const DropSection = ({ collection, isSecond }) => (
         <Box>
           {collection != null ? (
             <>
-              <MintStatus collection={collection} isSecond={isSecond} />
+              <MintStatus collection={collection} />
               <MintDetails collection={collection} showPresale={false} />
             </>
           ) : (

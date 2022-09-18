@@ -1,26 +1,19 @@
 import { useERC721DropContract } from 'providers/ERC721DropProvider'
 import { useCallback, useState } from 'react'
-import { cleanErrors } from 'lib/errors'
 import MintButtonStyles from '@components/MintButtonStyles'
+import { cleanErrors } from 'lib/errors'
 
-const MintButton = ({
-  isMinted,
-  collection,
-  mintCounter,
-  allowlistEntry,
-  setIsMinted,
-  setErrors,
-}) => {
-  const { purchaseTrack, purchase } = useERC721DropContract()
+const MintBundleButton = ({ collection }) => {
+  const { purchaseBundle, purchase } = useERC721DropContract()
   const [awaitingApproval, setAwaitingApproval] = useState(false)
   const [isMinting, setIsMinting] = useState(false)
+  const [isMinted, setIsMinted] = useState(false)
 
   const handleMint = useCallback(async () => {
     setIsMinted(false)
     setAwaitingApproval(true)
-    setErrors(undefined)
     try {
-      const tx = await purchaseTrack(mintCounter, collection.editionMetadata.trackNumber)
+      const tx = await purchaseBundle(1)
       setAwaitingApproval(false)
       setIsMinting(true)
       if (tx) {
@@ -31,11 +24,11 @@ const MintButton = ({
         throw 'Error creating transaction! Please try again'
       }
     } catch (e) {
-      setErrors(cleanErrors(e))
+      console.error(cleanErrors(e))
       setAwaitingApproval(false)
       setIsMinting(false)
     }
-  }, [mintCounter, allowlistEntry, purchase, purchaseTrack])
+  }, [purchase, purchaseBundle])
 
   return (
     <MintButtonStyles
@@ -44,9 +37,9 @@ const MintButton = ({
       onClick={handleMint}
       awaitingApproval={awaitingApproval}
       isMinting={isMinting}
-      buttonText={`Mint "${collection.name}"`}
+      buttonText="Mint Bundle"
     />
   )
 }
 
-export default MintButton
+export default MintBundleButton
