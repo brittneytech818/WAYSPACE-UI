@@ -17,7 +17,7 @@ import abi from '@lib/ERC721Drop-abi.json'
 
 export interface ERC721DropProviderState {
   purchase: (quantity: number) => Promise<ContractTransaction | undefined>
-  purchaseTrack: (quantity: number) => Promise<ContractTransaction | undefined>
+  purchaseTrack: (quantity: number, trackNumber: number) => Promise<ContractTransaction | undefined>
   purchasePresale: (
     quantity: number,
     allowlistEntry?: AllowListEntry
