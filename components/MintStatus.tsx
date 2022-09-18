@@ -47,8 +47,6 @@ function SaleStatus({
       presale,
     })
 
-    console.log("startDate", startDate)
-
   if (saleIsFinished || isSoldOut) {
     return (
       <Box>
