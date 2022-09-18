@@ -1,4 +1,3 @@
-import { useSaleStatus } from '@hooks/useSaleStatus'
 import { useERC721DropContract } from 'providers/ERC721DropProvider'
 import { useCallback, useState } from 'react'
 import { cleanErrors } from 'lib/errors'
@@ -14,10 +13,6 @@ const MintButton = ({
 }) => {
   const presale = false
   const { purchaseTrack, purchase } = useERC721DropContract()
-  const { saleNotStarted } = useSaleStatus({
-    collection,
-    presale,
-  })
   const [awaitingApproval, setAwaitingApproval] = useState(false)
   const [isMinting, setIsMinting] = useState(false)
 
@@ -50,7 +45,6 @@ const MintButton = ({
       onClick={handleMint}
       awaitingApproval={awaitingApproval}
       isMinting={isMinting}
-      saleNotStarted={saleNotStarted}
       buttonText={`Mint "${collection.name}"`}
     />
   )

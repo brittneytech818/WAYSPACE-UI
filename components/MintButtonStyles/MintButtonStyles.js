@@ -3,6 +3,7 @@ import { Button, SpinnerOG } from '@zoralabs/zord'
 import { useERC721DropContract } from 'providers/ERC721DropProvider'
 import { useAccount, useNetwork } from 'wagmi'
 import { waitingApproval } from 'styles/styles.css'
+import { useSaleStatus } from '@hooks/useSaleStatus'
 
 const MintButtonStyles = ({
   isMinted,
@@ -10,11 +11,14 @@ const MintButtonStyles = ({
   onClick,
   awaitingApproval,
   isMinting,
-  saleNotStarted,
 }) => {
   const { switchNetwork } = useNetwork()
   const { data: account } = useAccount()
   const { chainId, correctNetwork } = useERC721DropContract()
+  const { saleNotStarted } = useSaleStatus({
+    collection,
+    presale,
+  })
 
   return (
     <ConnectButton.Custom>
