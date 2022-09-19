@@ -20,6 +20,15 @@ const DropSection = ({ collection }) => (
           height={500}
           width={500}
         />
+        {collection.editionMetadata?.mimeType?.includes?.('audio') && (
+          <audio controls>
+            <source
+              src={ipfsImage(collection.editionMetadata.animationURI)}
+              type={collection.editionMetadata.mimeType}
+            />
+            Your browser does not support the audio element.
+          </audio>
+        )}
       </Well>
       <Well className={border} p="x6">
         <Box>
