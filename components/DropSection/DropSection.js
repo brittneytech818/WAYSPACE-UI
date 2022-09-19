@@ -30,7 +30,6 @@ const DropSection = ({ collection }) => (
           </audio>
         )}
       </Well>
-
       <Well className={border} p="x6">
         <Box>
           {collection != null ? (
