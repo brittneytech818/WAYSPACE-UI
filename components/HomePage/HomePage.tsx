@@ -14,6 +14,7 @@ import { allChains } from 'wagmi'
 import getDefaultProvider from '@lib/getDefaultProvider'
 import { ethers } from 'ethers'
 import abi from '@lib/WAYSPACE-abi.json'
+import { Spinner } from 'degen'
 
 const HomePage: NextPage = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -67,9 +68,13 @@ const HomePage: NextPage = () => {
       {drops.length > 0 && <MintBundleButton collection={getDrop(contractAddress, {}, saleDetails)} />}
       <Stack wrap direction={ isMobile ? "column" :"row"} mt="x3" gap="x3">
         {
-          drops.length > 0  && drops.map((dropId) => 
-            (<DropSection key={dropId} trackNumber={dropId} saleDetails={saleDetails} />)
-          ) 
+          drops.length > 0  ? drops.map((dropId) => 
+            <DropSection key={dropId} trackNumber={dropId} saleDetails={saleDetails} />)
+          : 
+            <>
+              <h1>rendering wayspace...</h1>
+              <Spinner />
+            </>
         }
       </Stack>
       </Stack>
