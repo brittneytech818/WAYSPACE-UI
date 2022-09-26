@@ -53,6 +53,7 @@ export interface SubgraphEditionMetadata {
   imageURI: string
   contractURI: string
   animationURI: string
+  trackNumber: number
 }
 
 export interface SubgraphERC721Drop {
