@@ -16,24 +16,21 @@ const axios = require('axios').default
 
 const DropSection = ({ trackNumber, saleDetails }) => {
   const [drop, setDrop] = useState({})
-  const chainId = process.env.NEXT_PUBLIC_CHAIN_ID
-  // Create Ethers Contract
-  const chain = allChains.find((chain) => chain.id.toString() === chainId)
-  const provider = getDefaultProvider(chain.network, chainId)
 
   useEffect(() => {
     const load = async () => {
+      // 1. load contract
+      const chainId = process.env.NEXT_PUBLIC_CHAIN_ID
+      const chain = allChains.find((chain) => chain.id.toString() === chainId)
+      const provider = getDefaultProvider(chain.network, chainId)
       const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
       const contract = new ethers.Contract(contractAddress.toString(), abi, provider)
+      // 2. load metadata
       const songURI = await contract.songURI(trackNumber)
-
       const metadataURI = ipfsImage(songURI)
       const { data: metadata } = await axios.get(metadataURI)
-      console.log('metadata', metadata)
-
-      // Get Sale Details
+      // 3. load drop
       const drop = getDrop(contract.address, metadata, saleDetails)
-      console.log('NEW DROP', drop)
       setDrop(drop)
     }
 
@@ -41,8 +38,6 @@ const DropSection = ({ trackNumber, saleDetails }) => {
       load()
     }
   }, [trackNumber])
-
-  console.log('DROP', drop)
 
   if (!drop.editionMetadata)
     return (
