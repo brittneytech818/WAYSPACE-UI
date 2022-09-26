@@ -4,32 +4,24 @@ import {
 } from '@zoralabs/zord'
 import { ConnectWallet } from '@components/ConnectWallet'
 import { NextPage } from 'next'
-import { SubgraphERC721Drop } from 'models/subgraph'
 import DropSection from '@components/DropSection'
 import Head from '@components/Head'
 import MintBundleButton from '@components/MintBundleButton'
-import { ipfsImage } from '@lib/helpers'
 import { header } from 'styles/styles.css'
 import { useEffect, useState } from 'react'
-import { Contract } from 'ethers'
 import getDrop from '@lib/getDrop'
 import { allChains } from 'wagmi'
 import getDefaultProvider from '@lib/getDefaultProvider'
-import { ethers, utils } from 'ethers'
+import { ethers } from 'ethers'
 import abi from '@lib/WAYSPACE-abi.json'
-import { Spinner } from 'degen'
-
-const axios = require('axios').default;
 
 const HomePage: NextPage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [drops, setDrops] = useState([]);
-  const [dropCount, setDropCount] = useState(0);
   const [saleDetails, setSaleDetails] = useState({});
   
   const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
   const chainId = process.env.NEXT_PUBLIC_CHAIN_ID
-  // Create Ethers Contract
   const chain = allChains.find(
     (chain) => chain.id.toString() === chainId
   )
@@ -47,16 +39,12 @@ const HomePage: NextPage = () => {
       const dropArray = [];
     
       const numberOfDrops = await contract.dropsCreated();
-      setDropCount(numberOfDrops);
-      console.log("DROP COUNT", dropCount)
       const saleDetails = await contract.saleDetails();
       setSaleDetails(saleDetails)
-      
       for (let i = 1; i <= numberOfDrops; i++) {
         dropArray.push(i);
       }
       const reversed = dropArray.reverse();
-      console.log("dropArray", reversed)
       setDrops(reversed)
     }
 
@@ -69,8 +57,6 @@ const HomePage: NextPage = () => {
     window.addEventListener("resize", handleResize)
   },[])
 
-
-  console.log("DROPS", drops)
   return (
     <>
       <Head ogImage="https://bafybeibp5izlizpzogq72kmeh5twvzdkffxvivcttllgknoccyfvfj7e74.ipfs.nftstorage.link/WELCOME-BACK.jpg" />
