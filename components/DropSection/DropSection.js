@@ -39,13 +39,15 @@ const DropSection = ({ trackNumber, saleDetails }) => {
     }
   }, [trackNumber])
 
-  if (!drop.editionMetadata)
+  if (!drop.editionMetadata) {
     return (
       <>
         <h1>rendering wayspace...</h1>
         <Spinner />
       </>
     )
+  }
+
   return (
     <Box className={maxWidth} p="x4">
       <Text variant="display-md" mb="x8" align="center">
