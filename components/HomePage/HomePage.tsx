@@ -13,12 +13,11 @@ import { header } from 'styles/styles.css'
 import { useEffect, useState } from 'react'
 
 interface HomePageProps {
-  collection: SubgraphERC721Drop;
+  collections: SubgraphERC721Drop[];
   chainId?: number;
-  collectionTwo: SubgraphERC721Drop;
 }
 
-const HomePage: NextPage<HomePageProps> = ({ collection, chainId, collectionTwo }) => {
+const HomePage: NextPage<HomePageProps> = ({ collections, chainId }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   const handleResize = () => {
@@ -28,8 +27,9 @@ const HomePage: NextPage<HomePageProps> = ({ collection, chainId, collectionTwo 
   useEffect(() => {
     window.addEventListener("resize", handleResize)
   },[])
-  const ogImage = ipfsImage(collection.editionMetadata.imageURI)
+  const ogImage = ipfsImage(collections[0].editionMetadata.imageURI)
 
+  console.log("COLLECTIONS", collections)
   return (
     <>
       <Head ogImage={ogImage}/>
@@ -37,10 +37,14 @@ const HomePage: NextPage<HomePageProps> = ({ collection, chainId, collectionTwo 
         <ConnectWallet />
       </Flex>
       <Stack>
-      <MintBundleButton collection={collection} />
+      <MintBundleButton collection={collections[0]} />
       <Stack direction={ isMobile ? "column" :"row"} mt="x3" gap="x3">
-        <DropSection collection={collection} />
-        {collectionTwo && <DropSection collection={collectionTwo} />}
+        {
+          collections.map((song) => 
+            (<DropSection key={song.editionMetadata.trackNumber} collection={song} />)
+
+          )
+        }
       </Stack>
       </Stack>
     </>
