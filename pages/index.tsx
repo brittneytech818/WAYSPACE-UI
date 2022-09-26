@@ -7,7 +7,7 @@ import getDrop from '@lib/getDrop'
 import { allChains } from 'wagmi'
 import HomePage from '@components/HomePage/HomePage'
 
-const MintPage = ({collection, chainId, collection2}) => <HomePage collection={collection} chainId={chainId} collectionTwo={collection2} />
+const MintPage = ({collections, chainId}) => <HomePage collections={collections} chainId={chainId} />
 export default MintPage;
 
 export const getServerSideProps: GetStaticProps = async (context) => {
@@ -34,6 +34,6 @@ export const getServerSideProps: GetStaticProps = async (context) => {
   const erc721Drop = getDrop(contractAddress, metadata, saleDetails)
   const erc721Drop2 = getDrop(contractAddress, metadata2, saleDetails)
   return {
-    props: { collection: erc721Drop, chainId: chain.id, collection2: erc721Drop2 },
+    props: { collections: [erc721Drop, erc721Drop2], chainId: chain.id },
   }
 }
