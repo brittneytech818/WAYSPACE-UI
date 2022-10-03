@@ -71,7 +71,7 @@ export const ConnectWallet = ({ connectText = 'Connect wallet', ...props }) => {
                         type="button"
                         style={{ gap: 8, minWidth: 0, color: "#f09220" }}
                       >
-                        <Image width={24} height={24} src={"/wayspace-logo.png"} alt="logo" />
+                        <Image width={30} height={24} src={"/wayspace-logo.png"} alt="logo" />
                         <Box as="span" className={hideMobile}>
                           {account.displayName}
                         </Box>
