@@ -29,7 +29,7 @@ export const ConnectWallet = ({ connectText = 'Connect wallet', ...props }) => {
               }
               if (!mounted || !account || !chain) {
                 return (
-                  <Button style={{backgroundColor: "#f09220"}} size="sm" px="x4" onClick={openConnectModal} {...props}>
+                  <Button style={{backgroundColor: "#f09220", fontFamily: 'raleway-medium'}} size="sm" px="x4" onClick={openConnectModal} {...props}>
                     {connectText}
                   </Button>
                 )

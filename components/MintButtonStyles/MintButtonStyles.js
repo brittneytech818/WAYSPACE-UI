@@ -46,7 +46,9 @@ const MintButtonStyles = ({
               : onClick
           }
           style={
-            isMinted ? { backgroundColor: '#1CB687' } : { backgroundColor: '#f09220' }
+            isMinted
+              ? { backgroundColor: '#1CB687', fontFamily: 'raleway-medium' }
+              : { backgroundColor: '#f09220', fontFamily: 'raleway-medium' }
           }
           className={awaitingApproval ? waitingApproval : ''}
           disabled={
