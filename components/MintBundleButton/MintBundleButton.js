@@ -4,7 +4,7 @@ import MintButtonStyles from '@components/MintButtonStyles'
 import { cleanErrors } from 'lib/errors'
 
 const MintBundleButton = ({ collection }) => {
-  const { purchaseBundle, purchase } = useERC721DropContract()
+  const { purchaseBundle } = useERC721DropContract()
   const [awaitingApproval, setAwaitingApproval] = useState(false)
   const [isMinting, setIsMinting] = useState(false)
   const [isMinted, setIsMinted] = useState(false)
@@ -28,7 +28,7 @@ const MintBundleButton = ({ collection }) => {
       setAwaitingApproval(false)
       setIsMinting(false)
     }
-  }, [purchase, purchaseBundle])
+  }, [purchaseBundle])
 
   return (
     <MintButtonStyles
