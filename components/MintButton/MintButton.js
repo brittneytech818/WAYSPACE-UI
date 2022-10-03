@@ -20,8 +20,6 @@ const MintButton = ({
     setAwaitingApproval(true)
     setErrors(undefined)
     try {
-      console.log('mintCounter', mintCounter)
-      console.log('collection.editionMetadata.trackNumber', collection.trackNumber)
       const tx = await purchaseTrack(mintCounter, collection.trackNumber)
       setAwaitingApproval(false)
       setIsMinting(true)
