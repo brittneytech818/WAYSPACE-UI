@@ -10,10 +10,10 @@ import {
   Separator,
 } from '@zoralabs/zord'
 import { menuItem, hideMobile } from 'styles/styles.css'
-import { Zorb } from 'components/Zorb'
 import Link from 'next/link'
 import { shortenAddress } from 'lib/helpers'
 import { useDisconnect } from 'wagmi'
+import Image from 'next/image'
 
 export const ConnectWallet = ({ connectText = 'Connect wallet', ...props }) => {
   const { disconnect } = useDisconnect()
@@ -28,7 +28,7 @@ export const ConnectWallet = ({ connectText = 'Connect wallet', ...props }) => {
               }
               if (!mounted || !account || !chain) {
                 return (
-                  <Button size="sm" px="x4" onClick={openConnectModal} {...props}>
+                  <Button style={{backgroundColor: "#f09220", fontFamily: 'raleway-medium'}} size="sm" px="x4" onClick={openConnectModal} {...props}>
                     {connectText}
                   </Button>
                 )
@@ -69,9 +69,9 @@ export const ConnectWallet = ({ connectText = 'Connect wallet', ...props }) => {
                         pill
                         variant="ghost"
                         type="button"
-                        style={{ gap: 8, minWidth: 0 }}
+                        style={{ gap: 8, minWidth: 0, color: "#f09220" }}
                       >
-                        <Zorb size={24} address={account.address} />
+                        <Image width={30} height={24} src={"/wayspace-logo.png"} alt="logo" />
                         <Box as="span" className={hideMobile}>
                           {account.displayName}
                         </Box>
@@ -82,7 +82,7 @@ export const ConnectWallet = ({ connectText = 'Connect wallet', ...props }) => {
                       <Link passHref href={"https://etherscan.io/address/"+account.address}>
                         <Button as="a" size="sm" variant="ghost" className={menuItem}>
                           <span>{account.displayName}</span>
-                          <Paragraph size="sm" color="tertiary">
+                          <Paragraph size="sm" color="tertiary" style={{color: "#f09220"}}>
                             {shortenAddress(account.address)}
                           </Paragraph>
                         </Button>

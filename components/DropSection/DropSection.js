@@ -2,7 +2,7 @@ import { Box, Well, Text, Paragraph, SpinnerOG } from '@zoralabs/zord'
 import { MintStatus } from '@components/MintStatus'
 import { MintDetails } from '@components/MintDetails'
 import { ipfsImage } from '@lib/helpers'
-import { maxWidth, border, heroImage } from 'styles/styles.css'
+import { maxWidth, border, heroImage, orangeText, orangeHeader } from 'styles/styles.css'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { allChains } from 'wagmi'
@@ -31,6 +31,7 @@ const DropSection = ({ trackNumber, saleDetails }) => {
       const { data: metadata } = await axios.get(metadataURI)
       // 3. load drop
       const drop = getDrop(contract.address, metadata, saleDetails)
+      drop.trackNumber = trackNumber
       setDrop(drop)
     }
 
@@ -40,20 +41,15 @@ const DropSection = ({ trackNumber, saleDetails }) => {
   }, [trackNumber])
 
   if (!drop.editionMetadata) {
-    return (
-      <>
-        <h1>rendering wayspace...</h1>
-        <Spinner />
-      </>
-    )
+    return <h1 className={orangeText}>rendering wayspace...</h1>
   }
 
   return (
     <Box className={maxWidth} p="x4">
-      <Text variant="display-md" mb="x8" align="center">
+      <Text className={orangeHeader} variant="display-md" mb="x8" align="center">
         {drop.name}
       </Text>
-      <Text>{drop?.editionMetadata?.description}</Text>
+      <Text className={orangeText}>{drop?.editionMetadata?.description}</Text>
       <Box mt="x8" mx="auto" style={{ maxWidth: 560 }}>
         <Well className={border} p="x6" style={{ borderBottom: 0 }}>
           <Image

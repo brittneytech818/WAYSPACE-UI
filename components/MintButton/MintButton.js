@@ -11,7 +11,7 @@ const MintButton = ({
   setIsMinted,
   setErrors,
 }) => {
-  const { purchaseTrack, purchase } = useERC721DropContract()
+  const { purchaseTrack } = useERC721DropContract()
   const [awaitingApproval, setAwaitingApproval] = useState(false)
   const [isMinting, setIsMinting] = useState(false)
 
@@ -20,7 +20,7 @@ const MintButton = ({
     setAwaitingApproval(true)
     setErrors(undefined)
     try {
-      const tx = await purchaseTrack(mintCounter, collection.editionMetadata.trackNumber)
+      const tx = await purchaseTrack(mintCounter, collection.trackNumber)
       setAwaitingApproval(false)
       setIsMinting(true)
       if (tx) {
@@ -35,7 +35,7 @@ const MintButton = ({
       setAwaitingApproval(false)
       setIsMinting(false)
     }
-  }, [mintCounter, allowlistEntry, purchase, purchaseTrack])
+  }, [mintCounter, allowlistEntry, purchaseTrack])
 
   return (
     <MintButtonStyles
