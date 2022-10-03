@@ -29,6 +29,7 @@ export const hideMobile = style({
       display: 'none',
     },
   },
+  fontFamily: 'raleway-medium'
 })
 
 export const menuItem = style([
@@ -105,6 +106,12 @@ export const heroImage = style({
   maxHeight: '80vh',
 })
 
+export const orangeHeader = style({
+  fontFamily: 'cartoon-slam',
+  color: orange
+})
+
 export const orangeText = style({
+  fontFamily: 'raleway-medium',
   color: orange
 })

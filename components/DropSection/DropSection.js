@@ -2,7 +2,7 @@ import { Box, Well, Text, Paragraph, SpinnerOG } from '@zoralabs/zord'
 import { MintStatus } from '@components/MintStatus'
 import { MintDetails } from '@components/MintDetails'
 import { ipfsImage } from '@lib/helpers'
-import { maxWidth, border, heroImage, orangeText } from 'styles/styles.css'
+import { maxWidth, border, heroImage, orangeText, orangeHeader } from 'styles/styles.css'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { allChains } from 'wagmi'
@@ -46,7 +46,7 @@ const DropSection = ({ trackNumber, saleDetails }) => {
 
   return (
     <Box className={maxWidth} p="x4">
-      <Text className={orangeText} variant="display-md" mb="x8" align="center">
+      <Text className={orangeHeader} variant="display-md" mb="x8" align="center">
         {drop.name}
       </Text>
       <Text className={orangeText}>{drop?.editionMetadata?.description}</Text>
