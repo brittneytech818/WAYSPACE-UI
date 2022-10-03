@@ -5,6 +5,7 @@ import { useERC721DropContract } from 'providers/ERC721DropProvider'
 import { useSaleStatus } from 'hooks/useSaleStatus'
 import { parseInt } from 'lodash'
 import { OPEN_EDITION_SIZE, dateOptions } from 'lib/constants'
+import { orangeText } from 'styles/styles.css'
 
 export function MintDetails({
   collection,
@@ -47,12 +48,12 @@ export function MintDetails({
   return (
     <Stack gap="x4">
       <Stack gap="x3">
-        <Separator my="x2" />
+        <Separator my="x2" style={{backgroundColor: "#f09220"}} />
         <Flex gap="x3" justify="space-between">
           <Text variant="paragraph-sm" color="tertiary">
             Number minted
           </Text>
-          <Text variant="paragraph-sm">
+          <Text variant="paragraph-sm" className={orangeText}>
             {formattedMintedCount} NFTs  
           </Text>
         </Flex>
@@ -60,7 +61,7 @@ export function MintDetails({
           <Text variant="paragraph-sm" color="tertiary">
             Max per address
           </Text>
-          <Text variant="paragraph-sm">
+          <Text variant="paragraph-sm" className={orangeText}>
             {maxPerWallet > OPEN_EDITION_SIZE ? 'Unlimited' : maxPerWallet}
           </Text>
         </Flex>
@@ -90,7 +91,7 @@ export function MintDetails({
           <Text variant="paragraph-sm" color="tertiary">
             Public sale start
           </Text>
-          <Text variant="paragraph-sm" align="right">
+          <Text variant="paragraph-sm" align="right" className={orangeText}>
             {startDate.toLocaleString(...dateOptions as [string, Intl.DateTimeFormatOptions])}
           </Text>
         </Flex>
@@ -98,7 +99,7 @@ export function MintDetails({
           <Text variant="paragraph-sm" color="tertiary">
             Public sale end
           </Text>
-          <Text variant="paragraph-sm" align="right">
+          <Text variant="paragraph-sm" align="right" className={orangeText}>
             {!isNaN(endDate.getTime()) ? endDate.toLocaleString(...dateOptions as [string, Intl.DateTimeFormatOptions]) : 'Never'}
           </Text>
         </Flex>

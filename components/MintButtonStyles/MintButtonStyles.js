@@ -45,7 +45,9 @@ const MintButtonStyles = ({
               ? () => switchNetwork?.(chainId)
               : onClick
           }
-          style={isMinted ? { backgroundColor: '#1CB687' } : {}}
+          style={
+            isMinted ? { backgroundColor: '#1CB687' } : { backgroundColor: '#f09220' }
+          }
           className={awaitingApproval ? waitingApproval : ''}
           disabled={
             isMinting || awaitingApproval || (account && correctNetwork && saleNotStarted)

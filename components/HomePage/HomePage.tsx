@@ -7,7 +7,6 @@ import { NextPage } from 'next'
 import DropSection from '@components/DropSection'
 import Head from '@components/Head'
 import MintBundleButton from '@components/MintBundleButton'
-import { header } from 'styles/styles.css'
 import { useEffect, useState } from 'react'
 import getDrop from '@lib/getDrop'
 import { allChains } from 'wagmi'
@@ -59,9 +58,9 @@ const HomePage: NextPage = () => {
   },[])
 
   return (
-    <>
+    <div style={{backgroundColor: "#000000"}}>
       <Head ogImage="https://bafybeibp5izlizpzogq72kmeh5twvzdkffxvivcttllgknoccyfvfj7e74.ipfs.nftstorage.link/WELCOME-BACK.jpg" />
-      <Flex justify="flex-end" p="x4" className={header}>
+      <Flex justify="flex-end" p="x4">
         <ConnectWallet />
       </Flex>
       <Stack>
@@ -78,7 +77,7 @@ const HomePage: NextPage = () => {
         }
       </Stack>
       </Stack>
-    </>
+    </div>
   )
 }
 
