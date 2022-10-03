@@ -10,7 +10,6 @@ import {
   Separator,
 } from '@zoralabs/zord'
 import { menuItem, hideMobile } from 'styles/styles.css'
-import { Zorb } from 'components/Zorb'
 import Link from 'next/link'
 import { shortenAddress } from 'lib/helpers'
 import { useDisconnect } from 'wagmi'
